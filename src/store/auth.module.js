@@ -1,7 +1,7 @@
 import { ApiService } from "@/common/api.service";
 import JwtService from "@/common/jwt.service";
-import { REGISTER, LOGIN, LOGOUT } from "@/store/action.types.js";
-import { SET_USER_DATA, SET_ERROR, CHECK_AUTH } from "@/store/mutation.types.js";
+import { REGISTER, LOGIN, LOGOUT, FETCH_USER, CHECK_AUTH } from "@/store/action.types.js";
+import { SET_USER_DATA, SET_ERROR, DESTROY_USER } from "@/store/mutation.types.js";
 
 const state = {
   isAuthenticated: false,
@@ -15,53 +15,52 @@ const getters = {
   },
   isAuthenticated(state) {
     return state.isAuthenticated;
+  },
+  error(state) {
+    return state.error;
   }
 };
 
 const actions = {
   [REGISTER]({ commit }, credentials) {
-    return new Promise((resolve, reject) => {
+    return new Promise(resolve => {
       ApiService.post("users", { user: credentials })
         .then(({ data }) => {
           commit(SET_USER_DATA, data.user);
-          resolve();
+          resolve(data);
         })
         .catch(({ response }) => {
           console.log(response.data.errors);
           commit(SET_ERROR, response.data.errors);
-          reject();
         });
     });
   },
   [LOGIN]({ commit }, payload) {
-    return new Promise((resolve, reject) => {
+    return new Promise(resolve => {
       ApiService.post("users/login", { user: payload })
         .then(({ data }) => {
           commit(SET_USER_DATA, data.user);
-          resolve();
+          resolve(data);
         })
-        .catch(err => {
-          console.log(err);
-          commit(SET_ERROR, err);
-          reject();
+        .catch(({ response }) => {
+          commit(SET_ERROR, response.data.errors);
         });
     });
   },
   [LOGOUT]({ commit }) {
-    commit(LOGOUT);
+    commit(DESTROY_USER);
   },
   [CHECK_AUTH]({ commit }) {
-    return new Promise((resolve, reject) => {
+    return new Promise(() => {
       if (JwtService.getToken()) {
+        console.log();
+        ApiService.setHeader();
         ApiService.get("user")
           .then(({ data }) => {
             commit(SET_USER_DATA, data.user);
-            resolve();
           })
-          .catch(err => {
-            console.log(err);
-            commit(SET_ERROR, err);
-            reject();
+          .catch(({ response }) => {
+            commit(SET_ERROR, response);
           });
       }
     });
@@ -78,10 +77,16 @@ const mutations = {
   [SET_ERROR](state, errors) {
     state.error = errors;
   },
-  [LOGOUT](state) {
+  [DESTROY_USER](state) {
     JwtService.destroyToken();
     location.reload();
   }
+  // [PURGE_AUTH](state) {
+  //   state.isAuthenticated = false;
+  //   state.user = {};
+  //   state.errors = {};
+  //   JwtService.destroyToken();
+  // }
 };
 
 export default {

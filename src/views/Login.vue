@@ -4,6 +4,9 @@
       <h1>Login</h1>
     </v-card-title>
     <v-card-text>
+      <ul v-if="error">
+        <li v-for="(v,i) in error" :key="i">{{ v }}</li>
+      </ul>
       <v-form>
         <v-text-field v-model="email" label="Email" prepend-icon="mdi-account-circle" />
         <v-text-field
@@ -22,6 +25,8 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 export default {
   data() {
     return {
@@ -29,6 +34,9 @@ export default {
       password: "",
       showPassword: false
     };
+  },
+  computed: {
+    ...mapGetters(["error"])
   },
   methods: {
     onSubmit() {

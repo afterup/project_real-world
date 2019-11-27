@@ -67,7 +67,7 @@ export default {
   data() {
     return {
       links: ["home", "til", "login", "signup"],
-      memberLinks: ["home", "til", "post"]
+      memberLinks: ["home", "til"]
     };
   },
   computed: {

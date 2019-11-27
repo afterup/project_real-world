@@ -1,7 +1,8 @@
-import Vue from 'vue';
-import axios from 'axios';
-import VueAxios from 'vue-axios';
-import { API_URL } from '@/common/config';
+import Vue from "vue";
+import axios from "axios";
+import VueAxios from "vue-axios";
+import { API_URL } from "@/common/config";
+import JwtService from "@/common/jwt.service";
 
 export const ApiService = {
   init() {
@@ -9,18 +10,18 @@ export const ApiService = {
     Vue.axios.defaults.baseURL = API_URL;
   },
 
-  setHeader(token) {
-    Vue.axios.defaults.headers.common.Authorization = `Beaer ${token}`;
+  setHeader() {
+    Vue.axios.defaults.headers.common["Authorization"] = `Token ${JwtService.getToken()}`;
   },
 
   query(resource, params) {
-    return Vue.axios.get(resource, params).catch((error) => {
+    return Vue.axios.get(resource, params).catch(error => {
       throw new Error(`[RWV] ApiService ${error}`);
     });
   },
 
   get(resource) {
-    return Vue.axios.get(`${resource}`).catch((error) => {
+    return Vue.axios.get(`${resource}`).catch(error => {
       throw new Error(`[RWV] ApiService ${error}`);
     });
   },
@@ -38,10 +39,10 @@ export const ApiService = {
   },
 
   delete(resource) {
-    return Vue.axios.delete(resource).catch((error) => {
+    return Vue.axios.delete(resource).catch(error => {
       throw new Error(`[RWV] ApiService ${error}`);
     });
-  },
+  }
 };
 
 export default ApiService;
