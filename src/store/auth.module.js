@@ -1,7 +1,7 @@
 import { ApiService } from "@/common/api.service";
-import { saveToken } from "@/common/jwt.service";
-import { REGISTER } from "@/store/action.types.js";
-import { SET_USER_DATA, SET_ERROR } from "@/store/mutation.types.js";
+import JwtService from "@/common/jwt.service";
+import { REGISTER, LOGIN, LOGOUT } from "@/store/action.types.js";
+import { SET_USER_DATA, SET_ERROR, CHECK_AUTH } from "@/store/mutation.types.js";
 
 const state = {
   isAuthenticated: false,
@@ -32,6 +32,39 @@ const actions = {
           reject();
         });
     });
+  },
+  [LOGIN]({ commit }, payload) {
+    return new Promise((resolve, reject) => {
+      ApiService.post("users/login", { user: payload })
+        .then(({ data }) => {
+          commit(SET_USER_DATA, data.user);
+          resolve();
+        })
+        .catch(err => {
+          console.log(err);
+          commit(SET_ERROR, err);
+          reject();
+        });
+    });
+  },
+  [LOGOUT]({ commit }) {
+    commit(LOGOUT);
+  },
+  [CHECK_AUTH]({ commit }) {
+    return new Promise((resolve, reject) => {
+      if (JwtService.getToken()) {
+        ApiService.get("user")
+          .then(({ data }) => {
+            commit(SET_USER_DATA, data.user);
+            resolve();
+          })
+          .catch(err => {
+            console.log(err);
+            commit(SET_ERROR, err);
+            reject();
+          });
+      }
+    });
   }
 };
 
@@ -40,10 +73,14 @@ const mutations = {
     state.isAuthenticated = true;
     state.user = user;
     ApiService.setHeader(user.token);
-    saveToken(user.token);
+    JwtService.saveToken(user.token);
   },
   [SET_ERROR](state, errors) {
     state.error = errors;
+  },
+  [LOGOUT](state) {
+    JwtService.destroyToken();
+    location.reload();
   }
 };
 

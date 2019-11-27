@@ -37,24 +37,22 @@
             text
             exact
           >{{ link }}</v-btn>
-          <div class="dropdown text-center">
-            <v-menu offset-y>
-              <template v-slot:activator="{ on }">
-                <v-btn color="primary" dark v-on="on">{{ currentUser.username }}</v-btn>
-              </template>
-              <v-list>
-                <v-list-item>
-                  <v-list-item-title>{{ currentUser.username}}</v-list-item-title>
-                </v-list-item>
-                <v-list-item>
-                  <v-list-item-title>Mypage</v-list-item-title>
-                </v-list-item>
-                <v-list-item>
-                  <v-list-item-title @click="logout()">Logout</v-list-item-title>
-                </v-list-item>
-              </v-list>
-            </v-menu>
-          </div>
+          <v-menu offset-y class="ml-0 hidden-sm-and-down">
+            <template v-slot:activator="{ on }">
+              <v-btn color="primary" dark v-on="on">{{ currentUser.username }}</v-btn>
+            </template>
+            <v-list>
+              <v-list-item>
+                <v-list-item-title>{{ currentUser.username}}</v-list-item-title>
+              </v-list-item>
+              <v-list-item>
+                <v-list-item-title>Mypage</v-list-item-title>
+              </v-list-item>
+              <v-list-item>
+                <v-list-item-title @click="logout()">Logout</v-list-item-title>
+              </v-list-item>
+            </v-list>
+          </v-menu>
         </div>
       </v-layout>
     </v-container>
@@ -77,7 +75,7 @@ export default {
   },
   methods: {
     logout() {
-      this.$store.dispatch("userSignOut");
+      this.$store.dispatch("LOGOUT");
     }
   }
 };

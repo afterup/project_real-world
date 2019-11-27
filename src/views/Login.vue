@@ -25,19 +25,23 @@
 export default {
   data() {
     return {
-      email: '',
-      password: '',
-      showPassword: false,
+      email: "",
+      password: "",
+      showPassword: false
     };
   },
   methods: {
     onSubmit() {
-      this.$store.dispatch('userLogin', {
-        email: this.email,
-        password: this.password,
-      });
-    },
-  },
+      this.$store
+        .dispatch("LOGIN", {
+          email: this.email,
+          password: this.password
+        })
+        .then(() => {
+          this.$router.push({ name: "home" });
+        });
+    }
+  }
 };
 </script>
 
