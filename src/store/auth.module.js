@@ -1,90 +1,55 @@
-import * as firebase from 'firebase';
-import axios from 'axios';
-import router from '@/router';
+import { ApiService } from "@/common/api.service";
+import { saveToken } from "@/common/jwt.service";
+import { REGISTER } from "@/store/action.types.js";
+import { SET_USER_DATA, SET_ERROR } from "@/store/mutation.types.js";
 
 const state = {
-  user: null,
-  isAuthenticated: false
+  isAuthenticated: false,
+  user: {},
+  error: null
 };
 
-const mutations = {
-  setUser(state, payload) {
-    state.user = payload;
+const getters = {
+  currentUser(state) {
+    return state.user;
   },
-  setIsAuthenticated(state, payload) {
-    state.isAuthenticated = payload;
+  isAuthenticated(state) {
+    return state.isAuthenticated;
   }
 };
 
 const actions = {
-  async register({ commit, dispatch }, payload) {
-    try {
-      commit('setLoading', true);
-      commit('clearError');
-      const userAuth = await firebase
-        .auth()
-        .createUserWithEmailAndPassword(payload.email, payload.password);
-
-      /* Parser 에러 수정전 */
-      axios
-        .post('/users.json', { payload })
-        .then(res => {
-          console.log(res);
+  [REGISTER]({ commit }, credentials) {
+    return new Promise((resolve, reject) => {
+      ApiService.post("users", { user: credentials })
+        .then(({ data }) => {
+          commit(SET_USER_DATA, data.user);
+          resolve();
         })
-        .catch(error => {
-          console.log(error);
+        .catch(({ response }) => {
+          console.log(response.data.errors);
+          commit(SET_ERROR, response.data.errors);
+          reject();
         });
-    } catch (error) {
-      console.log(error);
-    }
-  },
-  userLogin({ commit }, payload) {
-    commit('setLoading', true);
-    commit('clearError');
-    firebase
-      .auth()
-      .signInWithEmailAndPassword(payload.email, payload.password)
-      .then(user => {
-        commit('setLoading', false);
-        commit('setUser', user);
-        console.log(user);
-        commit('setIsAuthenticated', true);
-        router.push({ name: 'home' });
-      })
-      .catch(() => {
-        commit('setUser', null);
-        commit('setIsAuthenticated', false);
-      });
-  },
-  userSignOut({ commit }) {
-    firebase
-      .auth()
-      .signOut()
-      .then(() => {
-        commit('setUser', null);
-        commit('setIsAuthenticated', false);
-        router.push('/');
-      })
-      .catch(() => {
-        commit('setUser', null);
-        commit('setIsAuthenticated', false);
-        router.push('/');
-      });
+    });
   }
 };
 
-const getters = {
-  isAuthenticated(state) {
-    return state.user !== null && state.user !== undefined;
+const mutations = {
+  [SET_USER_DATA](state, user) {
+    state.isAuthenticated = true;
+    state.user = user;
+    ApiService.setHeader(user.token);
+    saveToken(user.token);
   },
-  currentUser(state) {
-    return state.user;
+  [SET_ERROR](state, errors) {
+    state.error = errors;
   }
 };
 
 export default {
   state,
+  getters,
   actions,
-  mutations,
-  getters
+  mutations
 };

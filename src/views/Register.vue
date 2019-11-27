@@ -6,9 +6,14 @@
       </v-card-title>
       <v-card-text>
         <v-form>
+          <v-text-field v-model="username" label="UserName" prepend-icon="mdi-account-circle" />
           <v-text-field v-model="email" label="Email" prepend-icon="mdi-account-circle" />
           <v-text-field v-model="password" label="Password" prepend-icon="mdi-lock" />
-          <v-text-field v-model="confirmPassword" label="Confirm password" prepend-icon="mdi-lock" />
+          <v-text-field
+            v-model="confirmPassword"
+            label="Confirm password"
+            prepend-icon="mdi-lock"
+          />
           <v-divider></v-divider>
           <v-btn @click="onSubmit" color="info">Login</v-btn>
         </v-form>
@@ -21,22 +26,26 @@
 export default {
   data() {
     return {
+      username: '',
       email: '',
       password: '',
-      confirmPassword: ''
+      confirmPassword: '',
     };
   },
   methods: {
     onSubmit() {
-      console.log('onSubmit');
-      this.$store.dispatch('register', {
-        email: this.email,
-        password: this.password
-      });
-    }
-  }
+      this.$store
+        .dispatch('REGISTER', {
+          username: this.username,
+          email: this.email,
+          password: this.password,
+        })
+        .then(() => {
+          this.$router.push({ name: 'home' });
+        });
+    },
+  },
 };
 </script>
 
-<style>
-</style>
+<style></style>

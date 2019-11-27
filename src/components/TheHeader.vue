@@ -22,7 +22,7 @@
           <v-btn
             v-for="link in links"
             :key="link"
-            :to="{name: `${link}`}"
+            :to="{ name: `${link}` }"
             class="ml-0 hidden-sm-and-down"
             text
             exact
@@ -32,12 +32,29 @@
           <v-btn
             v-for="link in memberLinks"
             :key="link"
-            :to="{name: `${link}`}"
+            :to="{ name: `${link}` }"
             class="ml-0 hidden-sm-and-down"
             text
             exact
           >{{ link }}</v-btn>
-          <v-btn @click="logout()" class="ml-0 hidden-sm-and-down" text>Logout</v-btn>
+          <div class="dropdown text-center">
+            <v-menu offset-y>
+              <template v-slot:activator="{ on }">
+                <v-btn color="primary" dark v-on="on">{{ currentUser.username }}</v-btn>
+              </template>
+              <v-list>
+                <v-list-item>
+                  <v-list-item-title>{{ currentUser.username}}</v-list-item-title>
+                </v-list-item>
+                <v-list-item>
+                  <v-list-item-title>Mypage</v-list-item-title>
+                </v-list-item>
+                <v-list-item>
+                  <v-list-item-title @click="logout()">Logout</v-list-item-title>
+                </v-list-item>
+              </v-list>
+            </v-menu>
+          </div>
         </div>
       </v-layout>
     </v-container>
@@ -45,26 +62,25 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters } from "vuex";
 
 export default {
-  name: 'AppNavigation',
+  name: "AppNavigation",
   data() {
     return {
-      links: ['home', 'til', 'login', 'signup'],
-      memberLinks: ['home', 'til', 'post', 'mypage']
+      links: ["home", "til", "login", "signup"],
+      memberLinks: ["home", "til", "post"]
     };
   },
   computed: {
-    ...mapGetters(['currentUser', 'isAuthenticated'])
+    ...mapGetters(["currentUser", "isAuthenticated"])
   },
   methods: {
     logout() {
-      this.$store.dispatch('userSignOut');
+      this.$store.dispatch("userSignOut");
     }
   }
 };
 </script>
 
-<style scoped>
-</style>
+<style></style>

@@ -1,25 +1,25 @@
 <template>
   <v-app>
-    <TILHeader></TILHeader>
-    <v-content>
-      <router-view></router-view>
-    </v-content>
-    <TILFooter></TILFooter>
+    <app-header></app-header>
+    <router-view />
+    <app-footer></app-footer>
   </v-app>
 </template>
 
 <script>
-import TILHeader from '@/components/TheHeader';
-import TILFooter from '@/components/TheFooter';
+import AppHeader from '@/components/TheHeader.vue';
+import AppFooter from '@/components/TheFooter.vue';
 
 export default {
+  name: 'App',
+
   components: {
-    TILHeader,
-    TILFooter
-  }
+    AppHeader,
+    AppFooter,
+  },
+
+  data: () => ({
+    //
+  }),
 };
 </script>
-
-<style lang="scss">
-// @import '@/assets/scss/main.scss';
-</style>
