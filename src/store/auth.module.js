@@ -81,12 +81,6 @@ const mutations = {
     JwtService.destroyToken();
     location.reload();
   }
-  // [PURGE_AUTH](state) {
-  //   state.isAuthenticated = false;
-  //   state.user = {};
-  //   state.errors = {};
-  //   JwtService.destroyToken();
-  // }
 };
 
 export default {
