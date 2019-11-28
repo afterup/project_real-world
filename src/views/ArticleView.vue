@@ -23,7 +23,7 @@
       </v-col>
       <v-col col="4">
         <v-btn @click="updateArticle">수정</v-btn>
-        <!-- <v-btn @click="deleteArticle">삭제</v-btn> -->
+        <v-btn @click="deleteArticle">삭제</v-btn>
       </v-col>
     </v-row>
   </v-container>
@@ -31,7 +31,7 @@
 
 <script>
 import { mapGetters } from "vuex";
-import { FETCH_ARTICLE } from "@/store/action.types";
+import { FETCH_ARTICLE, DELETE_ARTICLE } from "@/store/action.types";
 
 export default {
   props: ["slug"],
@@ -44,6 +44,11 @@ export default {
   methods: {
     updateArticle() {
       this.$router.push({ name: "edit", params: this.slug });
+    },
+    deleteArticle() {
+      this.$store.dispatch(DELETE_ARTICLE, this.slug).then(() => {
+        this.$router.push({ name: "board" });
+      });
     }
   }
 };

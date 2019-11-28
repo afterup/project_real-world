@@ -3,7 +3,8 @@ import {
   FETCH_ARTICLE,
   FETCH_ARTICLES,
   PUBLISH_ARTICLE,
-  UPDATE_ARTICLE
+  UPDATE_ARTICLE,
+  DELETE_ARTICLE
 } from "@/store/action.types.js";
 import { SET_ARTICLE, SET_ARTICLES } from "@/store/mutation.types.js";
 
@@ -47,6 +48,9 @@ const actions = {
   async [UPDATE_ARTICLE]({ commit }, params) {
     const { data } = await ArticleService.put(params);
     console.log(data);
+  },
+  [DELETE_ARTICLE]({ commit }, slug) {
+    ArticleService.delete(slug);
   }
 };
 

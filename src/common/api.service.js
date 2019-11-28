@@ -66,5 +66,11 @@ export const ArticleService = {
     return Vue.axios.put(`articles/${params.slug}`, params).catch(error => {
       throw new Error(`[RWV] ArticleService ${error}`);
     });
+  },
+
+  delete(slug) {
+    return Vue.axios.delete(`articles/${slug}`).catch(error => {
+      throw new Error(`[RWV] ArticleService ${error}`);
+    });
   }
 };
