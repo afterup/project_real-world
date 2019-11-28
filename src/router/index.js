@@ -21,9 +21,9 @@ const routes = [
     component: () => import("@/views/Register.vue")
   },
   {
-    path: "/til",
-    name: "til",
-    component: () => import("@/views/About.vue"),
+    path: "/board",
+    name: "board",
+    component: () => import("@/views/ArticleBoard.vue"),
     meta: {
       requiresAuth: true
     }

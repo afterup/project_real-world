@@ -66,8 +66,8 @@ export default {
   name: "AppNavigation",
   data() {
     return {
-      links: ["home", "til", "login", "signup"],
-      memberLinks: ["home", "til"]
+      links: ["home", "board", "login", "signup"],
+      memberLinks: ["home", "board"]
     };
   },
   computed: {
