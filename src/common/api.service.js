@@ -56,5 +56,9 @@ export const ArticleService = {
     return Vue.axios.get(`articles/${slug}`).catch(error => {
       throw new Error(`[RWV] ArticleService ${error}`);
     });
+  },
+
+  post(params) {
+    return Vue.axios.post("articles", params);
   }
 };

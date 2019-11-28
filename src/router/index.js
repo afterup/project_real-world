@@ -23,10 +23,7 @@ const routes = [
   {
     path: "/board",
     name: "board",
-    component: () => import("@/views/ArticleBoard.vue"),
-    meta: {
-      requiresAuth: true
-    }
+    component: () => import("@/views/ArticleBoard.vue")
   },
   {
     path: "/article/:slug",
@@ -36,6 +33,11 @@ const routes = [
       requiresAuth: true
     },
     props: true
+  },
+  {
+    path: "/post",
+    name: "post",
+    component: () => import("@/views/ArticleCreate.vue")
   }
 ];
 

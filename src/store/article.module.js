@@ -1,5 +1,5 @@
 import { ApiService, ArticleService } from "@/common/api.service";
-import { FETCH_ARTICLE, FETCH_ARTICLES } from "@/store/action.types.js";
+import { FETCH_ARTICLE, FETCH_ARTICLES, PUBLISH_ARTICLE } from "@/store/action.types.js";
 import { SET_ARTICLE, SET_ARTICLES } from "@/store/mutation.types.js";
 
 const state = {
@@ -40,6 +40,12 @@ const actions = {
       .catch(error => {
         console.log(error);
       });
+  },
+  async [PUBLISH_ARTICLE]({ commit }, params) {
+    console.log(params);
+    const { data } = await ArticleService.post(params);
+    commit(SET_ARTICLE, data.article);
+    return data.article.slug;
   }
 };
 
@@ -48,7 +54,6 @@ const mutations = {
     state.articles = articles;
   },
   [SET_ARTICLE](state, article) {
-    console.log("why?");
     state.article = article;
   }
 };
