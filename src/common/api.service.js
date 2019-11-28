@@ -60,5 +60,11 @@ export const ArticleService = {
 
   post(params) {
     return Vue.axios.post("articles", params);
+  },
+
+  put(params) {
+    return Vue.axios.put(`articles/${params.slug}`, params).catch(error => {
+      throw new Error(`[RWV] ArticleService ${error}`);
+    });
   }
 };

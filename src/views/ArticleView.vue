@@ -21,7 +21,10 @@
           {{ article.body }}
         </div>
       </v-col>
-      <v-col col="4"> </v-col>
+      <v-col col="4">
+        <v-btn @click="updateArticle">수정</v-btn>
+        <!-- <v-btn @click="deleteArticle">삭제</v-btn> -->
+      </v-col>
     </v-row>
   </v-container>
 </template>
@@ -37,6 +40,11 @@ export default {
   },
   mounted() {
     this.$store.dispatch(FETCH_ARTICLE, this.slug);
+  },
+  methods: {
+    updateArticle() {
+      this.$router.push({ name: "edit", params: this.slug });
+    }
   }
 };
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <v-container class="post">
+  <v-container class="update">
     <v-row>
       <v-col>
         <form @submit.prevent="onSubmit">
@@ -14,7 +14,9 @@
 </template>
 
 <script>
-import { PUBLISH_ARTICLE } from "@/store/action.types";
+import { mapGetters } from "vuex";
+import { FETCH_ARTICLE, UPDATE_ARTICLE } from "@/store/action.types";
+
 export default {
   data() {
     return {
@@ -24,21 +26,35 @@ export default {
       // taglist: []
     };
   },
+  props: ["slug"],
+  created() {
+    this.$store.dispatch(FETCH_ARTICLE, this.slug).then(article => {
+      this.title = article.title;
+      this.description = article.description;
+      this.body = article.body;
+    });
+  },
   methods: {
     onSubmit() {
+      console.log(this.slug);
       this.$store
-        .dispatch(PUBLISH_ARTICLE, {
+        .dispatch(UPDATE_ARTICLE, {
           title: this.title,
           description: this.description,
-          body: this.body
+          body: this.body,
+          slug: this.slug
           // taglist: this.taglist
         })
-        .then(slug => {
-          this.$router.push({ name: `board` });
+        .then(() => {
+          this.$router.push({ name: `article`, params: this.slug });
         });
     }
   }
 };
 </script>
 
-<style scopde></style>
+<style scopde>
+.quill {
+  height: 100vh;
+}
+</style>

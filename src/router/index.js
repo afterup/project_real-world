@@ -38,6 +38,15 @@ const routes = [
     path: "/post",
     name: "post",
     component: () => import("@/views/ArticleCreate.vue")
+  },
+  {
+    path: "/edit/:slug",
+    name: "edit",
+    component: () => import("@/views/ArticleUpdate.vue"),
+    meta: {
+      requiresAuth: true
+    },
+    props: true
   }
 ];
 
