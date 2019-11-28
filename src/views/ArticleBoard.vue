@@ -1,33 +1,16 @@
 <template>
-  <v-app class="article-board">
-    <v-container>
-      <v-row no-gutters>
-        <v-col cols="12">
-          <h1>BOARD</h1>
-        </v-col>
-        <v-col v-for="article in articles" :key="article.slug" cols="8">
-          <article-card :article="article"></article-card>
-        </v-col>
-        <v-col cols="4"></v-col>
-      </v-row>
-    </v-container>
-  </v-app>
+  <v-container>
+    <article-list></article-list>
+  </v-container>
 </template>
 
 <script>
-import ArticleCard from "@/components/ArticleCard";
-import { FETCH_ARTICLES } from "@/store/action.types";
-import { mapGetters } from "vuex";
+import ArticleList from "@/components/ArticleList";
 
 export default {
-  created() {
-    this.$store.dispatch(FETCH_ARTICLES);
-  },
-  computed: {
-    ...mapGetters(["articles"])
-  },
+  name: "article-board",
   components: {
-    ArticleCard
+    ArticleList
   }
 };
 </script>

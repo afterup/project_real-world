@@ -1,5 +1,5 @@
-<template>
-  <v-card class="article-card mx-2 mb-4" max-width="500">
+<template v-slot:activator="{ on }">
+  <v-card @click="articleClick" class="article-card mx-2 mb-4" max-width="500">
     <v-card-text>
       <div class="text--primary mb-3">{{ article.title }}</div>
       <div>{{ article.description }}</div>
@@ -12,13 +12,14 @@
 
 <script>
 import { mapGetters } from "vuex";
+import { FETCH_ARTICLE } from "@/store/action.types";
 
 export default {
   name: "article-card",
   props: ["article"],
   methods: {
-    articleClick(e) {
-      console.log(e);
+    articleClick() {
+      this.$router.push({ name: "article", params: { slug: this.article.slug } });
     }
   }
 };

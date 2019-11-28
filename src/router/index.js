@@ -27,6 +27,15 @@ const routes = [
     meta: {
       requiresAuth: true
     }
+  },
+  {
+    path: "/article/:slug",
+    name: "article",
+    component: () => import("@/views/ArticleView.vue"),
+    meta: {
+      requiresAuth: true
+    },
+    props: true
   }
 ];
 

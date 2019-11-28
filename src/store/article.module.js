@@ -11,7 +11,6 @@ const state = {
     tagList: [],
     author: {}
   },
-  type: "",
   error: null
 };
 
@@ -25,14 +24,21 @@ const getters = {
 };
 
 const actions = {
-  [FETCH_ARTICLES]({ commit }) {
-    ArticleService.get()
+  [FETCH_ARTICLES]({ commit }, type, params) {
+    ArticleService.get(type, params).then(({ data }) => {
+      commit(SET_ARTICLES, data.articles);
+      console.log(data);
+    });
+  },
+  [FETCH_ARTICLE]({ commit }, slug) {
+    console.log(slug);
+    ArticleService.getOne(slug)
       .then(({ data }) => {
-        commit(SET_ARTICLES, data.articles);
+        commit(SET_ARTICLE, data.article);
         console.log(data);
       })
-      .catch(err => {
-        console.log(err);
+      .catch(error => {
+        console.log(error);
       });
   }
 };
@@ -42,6 +48,7 @@ const mutations = {
     state.articles = articles;
   },
   [SET_ARTICLE](state, article) {
+    console.log("why?");
     state.article = article;
   }
 };
