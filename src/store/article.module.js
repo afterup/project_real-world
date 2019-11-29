@@ -6,7 +6,12 @@ import {
   UPDATE_ARTICLE,
   DELETE_ARTICLE
 } from "@/store/action.types.js";
-import { SET_ARTICLE, SET_ARTICLES, SET_LOADING_STATUS } from "@/store/mutation.types.js";
+import {
+  SET_ARTICLE,
+  SET_ARTICLES,
+  SET_LOADING_STATUS,
+  FRESH_ARTICLE
+} from "@/store/mutation.types.js";
 
 const state = {
   isLoading: false,
@@ -41,7 +46,6 @@ const actions = {
       commit(SET_ARTICLES, data.articles);
       console.log(data);
     });
-    console.log(FETCH_ARTICLES);
   },
   async [FETCH_ARTICLE]({ commit }, slug) {
     const { data } = await ArticleService.getOne(slug);
@@ -50,7 +54,7 @@ const actions = {
   },
   async [PUBLISH_ARTICLE]({ commit }, params) {
     const { data } = await ArticleService.post(params);
-    console.log(data);
+    return data.article.slug;
   },
   async [UPDATE_ARTICLE]({ commit }, params) {
     const { data } = await ArticleService.put(params);

@@ -15,6 +15,8 @@
 
 <script>
 import { PUBLISH_ARTICLE } from "@/store/action.types";
+import { FRESH_ARTICLE } from "@/store/mutation.types";
+
 export default {
   data() {
     return {
@@ -34,7 +36,8 @@ export default {
           // taglist: this.taglist
         })
         .then(slug => {
-          this.$router.push({ name: `board` });
+          this.$router.push({ name: "article", params: { slug: slug } });
+          this.$store.commit(FRESH_ARTICLE);
         });
     }
   }

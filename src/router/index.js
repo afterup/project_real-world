@@ -37,6 +37,9 @@ const routes = [
   {
     path: "/post",
     name: "post",
+    meta: {
+      requiresAuth: true
+    },
     component: () => import("@/views/ArticleCreate.vue")
   },
   {
