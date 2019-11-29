@@ -6,9 +6,10 @@ import {
   UPDATE_ARTICLE,
   DELETE_ARTICLE
 } from "@/store/action.types.js";
-import { SET_ARTICLE, SET_ARTICLES } from "@/store/mutation.types.js";
+import { SET_ARTICLE, SET_ARTICLES, SET_LOADING_STATUS } from "@/store/mutation.types.js";
 
 const state = {
+  isLoading: false,
   articles: [],
   article: {
     title: "",
@@ -26,15 +27,21 @@ const getters = {
   },
   article(state) {
     return state.article;
+  },
+  isLoading(state) {
+    return state.isLoading;
   }
 };
 
 const actions = {
   [FETCH_ARTICLES]({ commit }, type, params) {
+    commit(SET_LOADING_STATUS);
     ArticleService.get(type, params).then(({ data }) => {
+      commit(SET_LOADING_STATUS);
       commit(SET_ARTICLES, data.articles);
       console.log(data);
     });
+    console.log(FETCH_ARTICLES);
   },
   async [FETCH_ARTICLE]({ commit }, slug) {
     const { data } = await ArticleService.getOne(slug);
@@ -55,11 +62,19 @@ const actions = {
 };
 
 const mutations = {
+  [FRESH_ARTICLE](state) {
+    state.isLoading = false;
+    state.article = {};
+    state.error = null;
+  },
   [SET_ARTICLES](state, articles) {
     state.articles = articles;
   },
   [SET_ARTICLE](state, article) {
     state.article = article;
+  },
+  [SET_LOADING_STATUS](state) {
+    state.isLoading = !state.isLoading;
   }
 };
 

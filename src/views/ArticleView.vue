@@ -13,13 +13,9 @@
     <v-row class="content">
       <v-col cols="8">
         <h1 class="headline">{{ article.title }}</h1>
-        <div class="description">
-          {{ article.description }}
-        </div>
+        <div class="description">{{ article.description }}</div>
         <hr />
-        <div class="body">
-          {{ article.body }}
-        </div>
+        <div class="body">{{ article.body }}</div>
       </v-col>
       <v-col col="4">
         <v-btn @click="updateArticle">수정</v-btn>
