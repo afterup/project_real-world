@@ -53,6 +53,7 @@ const actions = {
   },
   async [PUBLISH_ARTICLE]({ commit }, params) {
     const { data } = await ArticleService.post(params);
+    return data.article.slug;
   },
   async [UPDATE_ARTICLE]({ commit }, params) {
     const { data } = await ArticleService.put(params);

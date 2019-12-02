@@ -17,7 +17,7 @@
         <hr />
         <div class="body">{{ article.body }}</div>
       </v-col>
-      <v-col col="4">
+      <v-col col="4" v-if="checkUser">
         <v-btn @click="updateArticle">수정</v-btn>
         <v-btn @click="deleteArticle">삭제</v-btn>
       </v-col>
@@ -33,7 +33,13 @@ export default {
   name: "post",
   props: ["slug"],
   computed: {
-    ...mapGetters(["article"])
+    ...mapGetters(["article", "currentUser"]),
+    checkUser() {
+      if (this.currentUser.username && this.article.author.username) {
+        return this.currentUser.username === this.article.author.username;
+      }
+      return false;
+    }
   },
   mounted() {
     this.$store.dispatch(FETCH_ARTICLE, this.slug);
