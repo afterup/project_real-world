@@ -1,15 +1,15 @@
 <template>
   <div class="navigation-items">
     <div v-if="!isAuthenticated">
-      <NavigationItem :link="{name: 'home'}">홈페이지</NavigationItem>
-      <NavigationItem :link="{name: 'list'}">게시판</NavigationItem>
-      <NavigationItem :link="{name: 'signin'}">로그인</NavigationItem>
-      <NavigationItem :link="{name: 'signup'}">회원가입</NavigationItem>
+      <v-btn class="ml-0 hidden-sm-and-down" text exact :to="{name: 'home'}">홈페이지</v-btn>
+      <v-btn class="ml-0 hidden-sm-and-down" text exact :to="{name: 'list'}">게시판</v-btn>
+      <v-btn class="ml-0 hidden-sm-and-down" text exact :to="{name: 'signin'}">로그인</v-btn>
+      <v-btn class="ml-0 hidden-sm-and-down" text exact :to="{name: 'signup'}">회원가입</v-btn>
     </div>
     <div v-else>
-      <NavigationItem :link="{name:'home'}">홈페이지</NavigationItem>
-      <NavigationItem :link="{name: 'list'}">게시판</NavigationItem>
-      <NavigationItem :link="{name: 'edit'}">새글작성</NavigationItem>
+      <v-btn class="ml-0 hidden-sm-and-down" text exact :to="{name:'home'}">홈페이지</v-btn>
+      <v-btn class="ml-0 hidden-sm-and-down" text exact :to="{name: 'list'}">게시판</v-btn>
+      <v-btn class="ml-0 hidden-sm-and-down" text exact :to="{name: 'edit'}">새글작성</v-btn>
       <NavigationDropDown :currentUser="this.currentUser"></NavigationDropDown>
     </div>
   </div>
@@ -17,13 +17,11 @@
 
 <script>
 import { mapGetters } from "vuex";
-import NavigationItem from "@/components/common/NavigationItem.vue";
 import NavigationDropDown from "@/components/common/NavigationDropDown.vue";
 
 export default {
   name: "navigation-items",
   components: {
-    NavigationItem,
     NavigationDropDown
   },
   computed: {

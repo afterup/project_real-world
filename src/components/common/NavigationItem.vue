@@ -1,13 +1,12 @@
 <template>
-  <v-btn class="ml-0 hidden-sm-and-down" text exact :to="link">
+  <v-btn class="ml-0 hidden-sm-and-down" text exact>
     <slot />
   </v-btn>
 </template>
 
 <script>
 export default {
-  name: "navigation-item",
-  props: ["link"]
+  name: "navigation-item"
 };
 </script>
 

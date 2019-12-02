@@ -26,12 +26,9 @@ const routes = [
     component: () => import("@/pages/ListPage.vue")
   },
   {
-    path: "/post/:slug",
-    name: "post",
+    path: "/article/:slug",
+    name: "article",
     component: () => import("@/pages/PostPage.vue"),
-    meta: {
-      requiresAuth: true
-    },
     props: true
   },
   {
