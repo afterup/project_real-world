@@ -34,6 +34,9 @@ const routes = [
   {
     path: "/edit",
     name: "edit",
+    meta: {
+      requiresAuth: true
+    },
     component: () => import("@/pages/EditorPage.vue")
   },
   {

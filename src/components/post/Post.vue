@@ -50,7 +50,7 @@ export default {
     },
     deleteArticle() {
       this.$store.dispatch(DELETE_ARTICLE, this.slug).then(() => {
-        this.$router.push({ name: "board" });
+        this.$router.push({ name: "list" });
       });
     }
   }

@@ -39,12 +39,12 @@ const getters = {
 };
 
 const actions = {
-  [FETCH_ARTICLES]({ commit }, type, params) {
+  async [FETCH_ARTICLES]({ commit }, payload) {
     commit(SET_LOADING_STATUS);
-    ArticleService.get(type, params).then(({ data }) => {
-      commit(SET_LOADING_STATUS);
-      commit(SET_ARTICLES, data.articles);
-    });
+    console.log(payload);
+    const { data } = await ArticleService.get();
+    commit(SET_ARTICLES, data.articles);
+    commit(SET_LOADING_STATUS);
   },
   async [FETCH_ARTICLE]({ commit }, slug) {
     const { data } = await ArticleService.getOne(slug);

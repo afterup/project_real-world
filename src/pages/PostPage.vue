@@ -1,6 +1,6 @@
 <template>
   <div class="post-page">
-    <Post></Post>
+    <Post :slug="this.slug"></Post>
   </div>
 </template>
 
@@ -9,6 +9,7 @@ import Post from "@/components/post/Post.vue";
 
 export default {
   name: "post-page",
+  props: ["slug"],
   components: {
     Post
   }
