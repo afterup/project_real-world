@@ -1,16 +1,16 @@
 <template>
   <v-app>
-    <app-header></app-header>
+    <AppHeader></AppHeader>
     <v-content>
       <router-view />
     </v-content>
-    <app-footer></app-footer>
+    <AppFooter></AppFooter>
   </v-app>
 </template>
 
 <script>
-import AppHeader from "@/components/TheHeader.vue";
-import AppFooter from "@/components/TheFooter.vue";
+import AppHeader from "@/components/common/TheHeader.vue";
+import AppFooter from "@/components/common/TheFooter.vue";
 
 export default {
   name: "App",

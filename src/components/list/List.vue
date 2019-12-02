@@ -5,7 +5,7 @@
         <h1>BOARD</h1>
       </v-col>
       <v-col v-for="article in articles" :key="article.slug" cols="8">
-        <article-card :article="article"></article-card>
+        <ListCard :article="article"></ListCard>
       </v-col>
       <v-col cols="4"></v-col>
     </v-row>
@@ -13,12 +13,12 @@
 </template>
 
 <script>
-import ArticleCard from "@/components/ArticleCard";
+import ListCard from "@/components/list/ListCard";
 import { FETCH_ARTICLES } from "@/store/action.types";
 import { mapGetters } from "vuex";
 
 export default {
-  name: "article-list",
+  name: "list",
   computed: {
     ...mapGetters(["articles"])
   },
@@ -31,7 +31,7 @@ export default {
     }
   },
   components: {
-    ArticleCard
+    ListCard
   }
 };
 </script>

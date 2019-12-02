@@ -30,6 +30,7 @@ import { mapGetters } from "vuex";
 import { FETCH_ARTICLE, DELETE_ARTICLE } from "@/store/action.types";
 
 export default {
+  name: "post",
   props: ["slug"],
   computed: {
     ...mapGetters(["article"])

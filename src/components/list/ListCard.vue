@@ -15,11 +15,14 @@ import { mapGetters } from "vuex";
 import { FETCH_ARTICLE } from "@/store/action.types";
 
 export default {
-  name: "article-card",
+  name: "list-card",
   props: ["article"],
   methods: {
     articleClick() {
-      this.$router.push({ name: "article", params: { slug: this.article.slug } });
+      this.$router.push({
+        name: "article",
+        params: { slug: this.article.slug }
+      });
     }
   }
 };

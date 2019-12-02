@@ -1,16 +1,16 @@
 <template>
   <v-container>
-    <article-list></article-list>
+    <List></List>
   </v-container>
 </template>
 
 <script>
-import ArticleList from "@/components/ArticleList";
+import List from "@/components/list/List";
 
 export default {
-  name: "article-board",
+  name: "list-page",
   components: {
-    ArticleList
+    List
   }
 };
 </script>

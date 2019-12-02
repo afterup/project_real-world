@@ -8,41 +8,41 @@ const routes = [
   {
     path: "/",
     name: "home",
-    component: () => import("@/views/Home.vue")
+    component: () => import("@/pages/HomePage.vue")
   },
   {
-    path: "/login",
-    name: "login",
-    component: () => import("@/views/Login.vue")
+    path: "/signin",
+    name: "signin",
+    component: () => import("@/pages/AuthPage.vue")
   },
   {
     path: "/signup",
     name: "signup",
-    component: () => import("@/views/Register.vue")
+    component: () => import("@/pages/AuthPage.vue")
   },
   {
-    path: "/board",
-    name: "board",
-    component: () => import("@/views/ArticleBoard.vue")
+    path: "/list",
+    name: "list",
+    component: () => import("@/pages/ListPage.vue")
   },
   {
-    path: "/article/:slug",
-    name: "article",
-    component: () => import("@/views/ArticleView.vue"),
+    path: "/post/:slug",
+    name: "post",
+    component: () => import("@/pages/PostPage.vue"),
     meta: {
       requiresAuth: true
     },
     props: true
   },
   {
-    path: "/post",
-    name: "post",
-    component: () => import("@/views/ArticleCreate.vue")
+    path: "/edit",
+    name: "edit",
+    component: () => import("@/pages/EditorPage.vue")
   },
   {
     path: "/edit/:slug",
     name: "edit",
-    component: () => import("@/views/ArticleUpdate.vue"),
+    component: () => import("@/pages/EditorPage.vue"),
     meta: {
       requiresAuth: true
     },
