@@ -22,13 +22,8 @@ export default {
   computed: {
     ...mapGetters(["articles"])
   },
-  mounted() {
-    this.fetchArticle();
-  },
-  methods: {
-    fetchArticle() {
-      this.$store.dispatch(FETCH_ARTICLES);
-    }
+  created() {
+    this.$store.dispatch(FETCH_ARTICLES);
   },
   components: {
     ListCard

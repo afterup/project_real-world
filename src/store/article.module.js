@@ -10,7 +10,7 @@ import {
   SET_ARTICLE,
   SET_ARTICLES,
   SET_LOADING_STATUS,
-  FRESH_ARTICLE
+  RESET_ARTICLE
 } from "@/store/mutation.types.js";
 
 const state = {
@@ -39,12 +39,12 @@ const getters = {
 };
 
 const actions = {
-  async [FETCH_ARTICLES]({ commit }, payload) {
+  [FETCH_ARTICLES]({ commit }, type, params) {
     commit(SET_LOADING_STATUS);
-    console.log(payload);
-    const { data } = await ArticleService.get();
-    commit(SET_ARTICLES, data.articles);
-    commit(SET_LOADING_STATUS);
+    ArticleService.get(type, params).then(({ data }) => {
+      commit(SET_ARTICLES, data.articles);
+      commit(SET_LOADING_STATUS);
+    });
   },
   async [FETCH_ARTICLE]({ commit }, slug) {
     const { data } = await ArticleService.getOne(slug);
@@ -64,7 +64,7 @@ const actions = {
 };
 
 const mutations = {
-  [FRESH_ARTICLE](state) {
+  [RESET_ARTICLE](state) {
     state.isLoading = false;
     state.article = {};
     state.error = null;

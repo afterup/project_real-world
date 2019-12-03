@@ -1,28 +1,16 @@
 <template>
-  <v-container>
-    <v-row class="user-meta">
-      <v-col cols="9">
-        <img :src="article.author.image" alt="user-image" class="user-image" />
-        <h3 class="user-name">{{ article.author.username }}</h3>
-        <div>{{ article.createdAt }}</div>
-      </v-col>
-      <v-col cols="3">
-        <v-btn>Favorite {{ article.favoritesCount }}</v-btn>
-      </v-col>
-    </v-row>
-    <v-row class="content">
-      <v-col cols="8">
-        <h1 class="headline">{{ article.title }}</h1>
-        <div class="description">{{ article.description }}</div>
-        <hr />
-        <div class="body">{{ article.body }}</div>
-      </v-col>
-      <v-col col="4" v-if="checkUser">
-        <v-btn @click="updateArticle">수정</v-btn>
-        <v-btn @click="deleteArticle">삭제</v-btn>
-      </v-col>
-    </v-row>
-  </v-container>
+  <v-row class="content">
+    <v-col cols="8">
+      <h1 class="headline">{{ article.title }}</h1>
+      <div class="description">{{ article.description }}</div>
+      <hr />
+      <div class="body">{{ article.body }}</div>
+    </v-col>
+    <v-col col="4" v-if="checkUser">
+      <v-btn @click="updateArticle">수정</v-btn>
+      <v-btn @click="deleteArticle">삭제</v-btn>
+    </v-col>
+  </v-row>
 </template>
 
 <script>
@@ -31,9 +19,9 @@ import { FETCH_ARTICLE, DELETE_ARTICLE } from "@/store/action.types";
 
 export default {
   name: "post",
-  props: ["slug"],
+  props: ["article"],
   computed: {
-    ...mapGetters(["article", "currentUser"]),
+    ...mapGetters(["currentUser"]),
     checkUser() {
       if (this.currentUser.username && this.article.author.username) {
         return this.currentUser.username === this.article.author.username;
@@ -41,15 +29,15 @@ export default {
       return false;
     }
   },
-  mounted() {
-    this.$store.dispatch(FETCH_ARTICLE, this.slug);
+  created() {
+    this.$store.dispatch(FETCH_ARTICLE, this.article.slug);
   },
   methods: {
     updateArticle() {
-      this.$router.push({ name: "edit", params: this.slug });
+      this.$router.push({ name: "edit", params: this.article.slug });
     },
     deleteArticle() {
-      this.$store.dispatch(DELETE_ARTICLE, this.slug).then(() => {
+      this.$store.dispatch(DELETE_ARTICLE, this.article.slug).then(() => {
         this.$router.push({ name: "list" });
       });
     }

@@ -3,9 +3,9 @@
     <v-row>
       <v-col>
         <form @submit.prevent="onSubmit">
-          <v-text-field v-model="title" label="Title"></v-text-field>
-          <v-text-field v-model="description" label="description"></v-text-field>
-          <v-textarea v-model="body" label="body"></v-textarea>
+          <v-text-field v-model="article.title" label="Title"></v-text-field>
+          <v-text-field v-model="article.description" label="description"></v-text-field>
+          <v-textarea v-model="article.body" label="body"></v-textarea>
           <v-btn type="submit">등록</v-btn>
         </form>
       </v-col>
@@ -25,46 +25,47 @@ export default {
   name: "editor",
   data() {
     return {
-      title: "",
-      description: "",
-      body: ""
-      // taglist: []
+      article: {
+        title: "",
+        description: "",
+        body: ""
+        // taglist: []
+      }
     };
   },
-  props: ["slug"],
+  props: ["prevArticle"],
   created() {
-    if (this.slug) {
-      this.$store.dispatch(FETCH_ARTICLE, this.slug).then(article => {
-        this.title = article.title;
-        this.description = article.description;
-        this.body = article.body;
-      });
+    if (this.prevArticle) {
+      this.article = this.prevArticle;
     }
   },
   methods: {
     onSubmit() {
-      if (!this.slug) {
+      if (!this.prevArticle) {
         this.$store
           .dispatch(PUBLISH_ARTICLE, {
-            title: this.title,
-            description: this.description,
-            body: this.body
+            title: this.article.title,
+            description: this.article.description,
+            body: this.article.body
             // taglist: this.taglist
           })
           .then(slug => {
-            this.$router.push({ name: `board` });
+            this.$router.push({ name: `article`, params: slug });
           });
       } else {
         this.$store
           .dispatch(UPDATE_ARTICLE, {
-            title: this.title,
-            description: this.description,
-            body: this.body,
-            slug: this.slug
+            title: this.article.title,
+            description: this.article.description,
+            body: this.article.body,
+            slug: this.prevArticle.slug
             // taglist: this.taglist
           })
           .then(() => {
-            this.$router.push({ name: `article`, params: this.slug });
+            this.$router.push({
+              name: `article`,
+              params: this.prevArticle.slug
+            });
           });
       }
     }

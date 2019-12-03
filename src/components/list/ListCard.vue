@@ -12,7 +12,6 @@
 
 <script>
 import { mapGetters } from "vuex";
-import { FETCH_ARTICLE } from "@/store/action.types";
 
 export default {
   name: "list-card",
