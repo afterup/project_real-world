@@ -6,38 +6,44 @@ Vue.use(VueRouter);
 
 const routes = [
   {
-    path: "/",
     name: "home",
+    path: "/",
     component: () => import("@/pages/HomePage.vue")
   },
   {
-    path: "/signin",
     name: "signin",
+    path: "/signin",
     component: () => import("@/pages/AuthPage.vue")
   },
   {
-    path: "/signup",
     name: "signup",
+    path: "/signup",
     component: () => import("@/pages/AuthPage.vue")
   },
   {
-    path: "/list",
     name: "list",
+    path: "/list",
     component: () => import("@/pages/ListPage.vue")
   },
   {
-    path: "/article/:slug",
     name: "article",
+    path: "/article/:slug",
     component: () => import("@/pages/PostPage.vue"),
     props: true
   },
   {
-    path: "/edit/:slug?",
     name: "edit",
+    path: "/edit/:slug?",
     meta: {
       requiresAuth: true
     },
     component: () => import("@/pages/EditorPage.vue"),
+    props: true
+  },
+  {
+    name: "mypage",
+    path: "/:username",
+    component: () => import("@/pages/MyPage.vue"),
     props: true
   },
   {

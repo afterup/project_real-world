@@ -8,7 +8,7 @@
         <v-list-item-title>{{ currentUser.username }}</v-list-item-title>
       </v-list-item>
       <v-list-item>
-        <v-list-item-title>Mypage</v-list-item-title>
+        <v-list-item-title @click="mypage(currentUser.username)">Mypage</v-list-item-title>
       </v-list-item>
       <v-list-item>
         <v-list-item-title @click="logout()">Logout</v-list-item-title>
@@ -23,6 +23,10 @@ import { mapGetters } from "vuex";
 export default {
   props: ["currentUser"],
   methods: {
+    mypage(username) {
+      console.log(username);
+      this.$router.push({ name: "mypage", params: { username: username } });
+    },
     logout() {
       this.$store.dispatch("LOGOUT");
     }
@@ -30,5 +34,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>

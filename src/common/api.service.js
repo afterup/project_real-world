@@ -74,3 +74,11 @@ export const ArticleService = {
     });
   }
 };
+
+export const ProfileService = {
+  get(params) {
+    return Vue.axios.get(`profiles/${params}`).catch(error => {
+      throw new Error(`[RWV] ProfileService ${error}`);
+    });
+  }
+};

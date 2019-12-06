@@ -1,4 +1,4 @@
-import { ApiService, ArticleService } from "@/common/api.service";
+import { ArticleService } from "@/common/api.service";
 import {
   FETCH_ARTICLE,
   FETCH_ARTICLES,
