@@ -47,8 +47,10 @@ const actions = {
     });
   },
   async [FETCH_ARTICLE]({ commit }, slug) {
+    commit(SET_LOADING_STATUS);
     const { data } = await ArticleService.getOne(slug);
     commit(SET_ARTICLE, data.article);
+    commit(SET_LOADING_STATUS);
     return data.article;
   },
   async [PUBLISH_ARTICLE]({ commit }, params) {

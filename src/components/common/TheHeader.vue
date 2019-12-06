@@ -1,13 +1,13 @@
 <template>
-  <v-toolbar flat>
-    <v-container mx-1 py-0>
-      <v-layout>
+  <div>
+    <v-toolbar flat>
+      <v-toolbar-title>
         <Logo />
-        <v-spacer />
-        <NavigationItems />
-      </v-layout>
-    </v-container>
-  </v-toolbar>
+      </v-toolbar-title>
+      <v-spacer></v-spacer>
+      <NavigationItems />
+    </v-toolbar>
+  </div>
 </template>
 
 <script>

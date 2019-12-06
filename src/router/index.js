@@ -32,12 +32,22 @@ const routes = [
     props: true
   },
   {
-    path: "/edit",
+    path: "/edit/:slug?",
     name: "edit",
     meta: {
       requiresAuth: true
     },
-    component: () => import("@/pages/EditorPage.vue")
+    component: () => import("@/pages/EditorPage.vue"),
+    props: true
+  },
+  {
+    path: "/404",
+    name: "404",
+    component: () => import("@/pages/NotFoundPage.vue")
+  },
+  {
+    path: "*",
+    redirect: { name: "404" }
   }
 ];
 

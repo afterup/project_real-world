@@ -3,6 +3,10 @@
     <div class="board-title mb-5">
       <div class="display-1">🖥</div>
       <h1>BOARD</h1>
+      <v-divider></v-divider>
+    </div>
+    <div v-if="isLoading">
+      <v-progress-circular :size="50" color="primary" indeterminate></v-progress-circular>
     </div>
     <v-row no-gutters>
       <v-col cols="7">
@@ -26,7 +30,7 @@ import { mapGetters } from "vuex";
 export default {
   name: "list-page",
   computed: {
-    ...mapGetters(["articles"])
+    ...mapGetters(["articles", "isLoading"])
   },
   created() {
     this.$store.dispatch(FETCH_ARTICLES);
