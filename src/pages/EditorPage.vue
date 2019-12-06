@@ -28,16 +28,6 @@ import { PUBLISH_ARTICLE, FETCH_ARTICLE, UPDATE_ARTICLE } from "@/store/action.t
 export default {
   name: "editor-page",
   props: ["slug"],
-  data() {
-    return {
-      article: {
-        title: "",
-        description: "",
-        body: ""
-        // taglist: []
-      }
-    };
-  },
   async beforeRouteEnter(to, from, next) {
     await store.commit(RESET_ARTICLE);
     if (to.params.slug !== undefined) {
@@ -45,7 +35,9 @@ export default {
     }
     return next();
   },
-
+  computed: {
+    ...mapGetters(["article"])
+  },
   methods: {
     onSubmit() {
       if (!this.slug) {

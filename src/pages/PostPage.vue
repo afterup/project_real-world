@@ -15,7 +15,7 @@
           <div class="body">{{ article.body }}</div>
         </v-col>
         <v-col cols="4">
-          <v-btn @click="updateArticle">수정</v-btn>
+          <v-btn @click="updateArticle" :previousArticle="this.article">수정</v-btn>
           <v-btn @click="deleteArticle">삭제</v-btn>
         </v-col>
       </v-row>
@@ -42,7 +42,7 @@ export default {
   },
   methods: {
     updateArticle() {
-      this.$router.push({ name: "edit", params: this.slug });
+      this.$router.push({ name: "edit", params: { slug: this.slug } });
     },
     deleteArticle() {
       this.$store.dispatch(DELETE_ARTICLE, this.slug).then(() => {
