@@ -1,7 +1,9 @@
 <template>
-  <v-row class="user-meta">
-    <v-col cols="9">
+  <v-row align="end">
+    <v-col cols="2">
       <img :src="article.author.image" alt="user-image" class="user-image" />
+    </v-col>
+    <v-col col="4">
       <h3 class="user-name">{{ article.author.username }}</h3>
       <div>{{ article.createdAt }}</div>
     </v-col>

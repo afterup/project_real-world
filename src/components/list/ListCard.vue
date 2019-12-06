@@ -1,5 +1,5 @@
-<template v-slot:activator="{ on }">
-  <v-card @click="articleClick" class="article-card mx-2 mb-4" max-width="500">
+<template>
+  <v-card @click="articleClick" class="article-card mx-2 mb-4" min-width="600px">
     <v-card-text>
       <div class="text--primary mb-3">{{ article.title }}</div>
       <div>{{ article.description }}</div>

@@ -63,6 +63,9 @@ const mutations = {
   [SET_USER_DATA](state, user) {
     state.isAuthenticated = true;
     state.user = user;
+    if (state.user.image === null) {
+      state.user.image = "https://static.productionready.io/images/smiley-cyrus.jpg";
+    }
     ApiService.setHeader(user.token);
     JwtService.saveToken(user.token);
   },

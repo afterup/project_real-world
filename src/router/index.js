@@ -38,15 +38,6 @@ const routes = [
       requiresAuth: true
     },
     component: () => import("@/pages/EditorPage.vue")
-  },
-  {
-    path: "/edit/:slug",
-    name: "edit",
-    component: () => import("@/pages/EditorPage.vue"),
-    meta: {
-      requiresAuth: true
-    },
-    props: true
   }
 ];
 

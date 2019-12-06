@@ -1,7 +1,5 @@
 <template>
-  <div class="auth-page">
-    <Auth></Auth>
-  </div>
+  <Auth></Auth>
 </template>
 
 <script>

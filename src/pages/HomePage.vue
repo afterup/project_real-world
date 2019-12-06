@@ -1,39 +1,42 @@
 <template>
-  <v-container>
-    <v-row>
-      <v-col cols="12" class="md-12">
-        <v-card tile flat v-bind="$attrs" v-on="$listeners">
-          <div class="banner-image">
-            <h1 class="display-3 white--text pt-6">Real World</h1>
-            <div class="subheadingpl-2 mb-4 mt-2 ml-2 white--text">새로운 세상을 위한 도약</div>
-            <v-btn @click="writeClick" color="primary" depressed rounded>WRITE</v-btn>
-          </div>
-        </v-card>
-      </v-col>
-      <v-col cols="6" class="sm-3 md-6 lg-8">
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. At explicabo saepe distinctio sint
-        maxime ipsam laboriosam aliquid culpa? Assumenda laboriosam tempore fuga ipsum dolore fugit
-        quo praesentium molestiae quaerat quidem?
-      </v-col>
-      <v-col cols="6" class="sm-3 md-6 lg-8">
-        <p class="my-5">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ut tortor tellus. Donec
-          maximus curs us pulvinar. Proin vehicula eros mauris, sit amet rutrum libero vestibulum
-          ac. Morbi ullamcorper eu lacus vulputate consect. Etur vivamus sagittis accumsan quam eu
-          malesuada. Proin et ante vel libero ultrices cursus. Donec felis leo, cu rsus eget
-          hendrerit at, congue nec enim.
-        </p>
-      </v-col>
-      <v-col cols="4" md="4" v-for="category in categories" :key="category.name">
-        <v-card class="mx-3 text-center" max-width="250" height="230">
-          <v-card-text>
-            <p class="display-1 text--primary">{{ category.emoticon }}</p>
-            <div class="text--primary">{{ category.name }}</div>
-          </v-card-text>
-        </v-card>
-      </v-col>
-    </v-row>
-  </v-container>
+  <div class="home">
+    <div class="banner-image">
+      <h1 class="display-3 white--text pt-6">Real World</h1>
+      <div class="subheadingpl-2 mb-4 mt-2 ml-2 white--text">새로운 세상을 위한 도약</div>
+      <v-btn @click="writeClick" color="primary" depressed rounded>WRITE</v-btn>
+    </div>
+    <v-container>
+      <v-row>
+        <v-col cols="6" class="sm-3 md-6 lg-8">
+          Lorem ipsum dolor sit, amet consectetur adipisicing elit. At explicabo saepe distinctio sint
+          maxime ipsam laboriosam aliquid culpa? Assumenda laboriosam tempore fuga ipsum dolore fugit
+          quo praesentium molestiae quaerat quidem?
+        </v-col>
+        <v-col cols="6" class="sm-3 md-6 lg-8">
+          <p class="my-5">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ut tortor tellus. Donec
+            maximus curs us pulvinar. Proin vehicula eros mauris, sit amet rutrum libero vestibulum
+            ac. Morbi ullamcorper eu lacus vulputate consect. Etur vivamus sagittis accumsan quam eu
+            malesuada. Proin et ante vel libero ultrices cursus. Donec felis leo, cu rsus eget
+            hendrerit at, congue nec enim.
+          </p>
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col cols="4" align="center" md="4" v-for="category in categories" :key="category.name">
+          <v-card class="mx-2 text-center" max-width="250" height="230">
+            <v-card-text>
+              <p class="display-1 text--primary">{{ category.emoticon }}</p>
+              <div class="text--primary">{{ category.name }}</div>
+            </v-card-text>
+          </v-card>
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col cols="12" class="sm-3 md-6 lg-8"></v-col>
+      </v-row>
+    </v-container>
+  </div>
 </template>
 
 <script>
