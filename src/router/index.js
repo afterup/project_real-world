@@ -21,11 +21,6 @@ const routes = [
     component: () => import("@/pages/AuthPage.vue")
   },
   {
-    name: "list",
-    path: "/list",
-    component: () => import("@/pages/ListPage.vue")
-  },
-  {
     name: "article",
     path: "/article/:slug",
     component: () => import("@/pages/PostPage.vue"),

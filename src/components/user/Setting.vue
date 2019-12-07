@@ -4,7 +4,7 @@
     <v-text-field v-model="user.email" label="Email"></v-text-field>
     <v-text-field v-model="user.password" label="Password"></v-text-field>
     <v-text-field v-model="user.bio" label="Introduction"></v-text-field>
-    <v-text-field v-model="user.img" label="Image URL"></v-text-field>
+    <v-text-field v-model="user.image" label="Image URL"></v-text-field>
     <v-btn color="primary" type="submit">등록</v-btn>
     <v-btn>취소</v-btn>
   </form>

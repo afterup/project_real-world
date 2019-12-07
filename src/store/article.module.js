@@ -53,6 +53,13 @@ const actions = {
     commit(SET_LOADING_STATUS);
     return data.article;
   },
+  FETCH_USER_ARTICLE({ commit }, username) {
+    commit(SET_LOADING_STATUS);
+    ApiService.get(`articles?author=${username}`).then(({ data }) => {
+      commit(SET_ARTICLES, data, articles);
+      commit(SET_LOADING_STATUS);
+    });
+  },
   async [PUBLISH_ARTICLE]({ commit }, params) {
     const { data } = await ArticleService.post(params);
     return data.article.slug;

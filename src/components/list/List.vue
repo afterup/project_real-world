@@ -1,8 +1,7 @@
 <template>
   <v-container>
     <div class="board-title mb-5">
-      <div class="display-1">🖥</div>
-      <h1>BOARD</h1>
+      <h1>Global Feed</h1>
       <v-divider></v-divider>
     </div>
     <div v-if="isLoading">
@@ -15,7 +14,7 @@
         </v-row>
       </v-col>
       <v-col cols="5" align="start">
-        <ListSide></ListSide>
+        <ListTag></ListTag>
       </v-col>
     </v-row>
   </v-container>
@@ -23,12 +22,12 @@
 
 <script>
 import ListCard from "@/components/list/ListCard";
-import ListSide from "@/components/list/ListSide";
+import ListTag from "@/components/list/ListTag";
 import { FETCH_ARTICLES } from "@/store/action.types";
 import { mapGetters } from "vuex";
 
 export default {
-  name: "list-page",
+  name: "list",
   computed: {
     ...mapGetters(["articles", "isLoading"])
   },
@@ -37,7 +36,7 @@ export default {
   },
   components: {
     ListCard,
-    ListSide
+    ListTag
   }
 };
 </script>
