@@ -4,7 +4,7 @@
       <v-toolbar-title>
         <Logo />
       </v-toolbar-title>
-      <v-spacer></v-spacer>
+      <v-spacer />
       <NavigationItems />
     </v-toolbar>
   </div>

@@ -44,7 +44,15 @@ const routes = [
     name: "mypage",
     path: "/:username",
     component: () => import("@/pages/MyPage.vue"),
-    props: true
+    props: true,
+    children: [
+      {
+        name: "setting",
+        path: "setting",
+        component: () => import("@/components/user/Setting.vue"),
+        props: true
+      }
+    ]
   },
   {
     path: "/404",
