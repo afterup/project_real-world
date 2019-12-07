@@ -40,32 +40,18 @@ export default {
   },
   methods: {
     onSubmit() {
-      if (!this.slug) {
-        this.$store
-          .dispatch(PUBLISH_ARTICLE, {
-            title: this.article.title,
-            description: this.article.description,
-            body: this.article.body
-            // taglist: this.taglist
-          })
-          .then(slug => {
-            this.$router.push({ name: `list` });
-          });
-      } else {
-        this.$store
-          .dispatch(UPDATE_ARTICLE, {
-            title: this.article.title,
-            description: this.article.description,
-            body: this.article.body,
-            slug: this.slug
-            // taglist: this.taglist
-          })
-          .then(() => {
-            this.$router.push({
-              name: `list`
-            });
-          });
-      }
+      const action = !this.slug ? PUBLISH_ARTICLE : UPDATE_ARTICLE;
+      this.$store
+        .dispatch(action, {
+          title: this.article.title,
+          description: this.article.description,
+          body: this.article.body,
+          slug: this.slug,
+          taglist: this.taglist
+        })
+        .then(slug => {
+          this.$router.push({ name: `list` });
+        });
     }
   }
 };
