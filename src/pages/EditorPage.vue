@@ -21,21 +21,22 @@
 
 <script>
 import { mapGetters } from "vuex";
-import { RESET_ARTICLE } from "@/store/mutation.types";
 import store from "@/store";
 import {
   PUBLISH_ARTICLE,
   FETCH_ARTICLE,
-  UPDATE_ARTICLE
+  UPDATE_ARTICLE,
+  RESET_ARTICLE
 } from "@/store/action.types";
 
 export default {
   name: "editor-page",
   props: ["slug"],
   async beforeRouteEnter(to, from, next) {
-    await store.commit(RESET_ARTICLE);
+    await store.dispatch(RESET_ARTICLE);
     if (to.params.slug !== undefined) {
-      await store.dispatch(FETCH_ARTICLE, to.params.slug);
+      console.log(to.params.previousArticle);
+      await store.dispatch(FETCH_ARTICLE, to.params.slug, to.params.previousArticle);
     }
     return next();
   },

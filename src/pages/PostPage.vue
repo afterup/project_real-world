@@ -15,8 +15,8 @@
           <div class="body">{{ article.body }}</div>
         </v-col>
         <v-col cols="4">
-          <v-btn @click="updateArticle" :previousArticle="this.article">수정</v-btn>
-          <v-btn @click="deleteArticle">삭제</v-btn>
+          <v-btn @click.prevent="updateArticle">수정</v-btn>
+          <v-btn @click.prevent="deleteArticle">삭제</v-btn>
         </v-col>
       </v-row>
     </v-container>
@@ -43,11 +43,14 @@ export default {
   },
   methods: {
     updateArticle() {
-      this.$router.push({ name: "edit", params: { slug: this.slug } });
+      this.$router.push({
+        name: "edit",
+        params: { slug: this.slug, previousArticle: this.article }
+      });
     },
     deleteArticle() {
       this.$store.dispatch(DELETE_ARTICLE, this.slug).then(() => {
-        this.$router.push({ name: "list" });
+        this.$router.push({ name: "home" });
       });
     }
   },

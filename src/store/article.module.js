@@ -51,12 +51,17 @@ const actions = {
       commit(SET_LOADING_STATUS);
     });
   },
-  async [FETCH_ARTICLE]({ commit }, slug) {
-    commit(SET_LOADING_STATUS);
-    const { data } = await ArticleService.getOne(slug);
-    commit(SET_ARTICLE, data.article);
-    commit(SET_LOADING_STATUS);
-    return data.article;
+  async [FETCH_ARTICLE]({ commit }, slug, previousArticle) {
+    if (previousArticle !== undefined) {
+      commit(SET_ARTICLE, previousArticle);
+      return previousArticle;
+    } else {
+      commit(SET_LOADING_STATUS);
+      const { data } = await ArticleService.getOne(slug);
+      commit(SET_ARTICLE, data.article);
+      commit(SET_LOADING_STATUS);
+      return data.article;
+    }
   },
   FETCH_TAGS({ commit }) {
     ApiService.get("tags").then(({ data }) => {
@@ -69,9 +74,13 @@ const actions = {
   },
   async [UPDATE_ARTICLE]({ commit }, params) {
     const { data } = await ArticleService.put(params);
+    return data.article.slug;
   },
   [DELETE_ARTICLE]({ commit }, slug) {
     ArticleService.delete(slug);
+  },
+  RESET_ARTICLE({ commit }) {
+    commit(RESET_ARTICLE);
   }
 };
 
