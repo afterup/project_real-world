@@ -1,6 +1,5 @@
 <template>
   <v-container>
-    sdfsdf
     <List :author="author" />
   </v-container>
 </template>

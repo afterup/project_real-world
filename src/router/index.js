@@ -36,7 +36,6 @@ const routes = [
     props: true
   },
   {
-    name: "mypage",
     path: "/:username",
     component: () => import("@/pages/MyPage.vue"),
     children: [
@@ -53,6 +52,12 @@ const routes = [
         props: true
       }
     ]
+  },
+  {
+    name: "search-page",
+    path: "/search",
+    component: () => import("@/pages/SearchPage.vue"),
+    props: true
   },
   {
     path: "/404",
