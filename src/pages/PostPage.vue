@@ -32,7 +32,12 @@ import PostMeta from "@/components/post/PostMeta.vue";
 
 export default {
   name: "post-page",
-  props: ["slug"],
+  props: {
+    slug: {
+      type: String,
+      required: false
+    }
+  },
   computed: {
     ...mapGetters(["article", "currentUser", "isLoading"])
   },

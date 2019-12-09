@@ -21,7 +21,12 @@
 import { mapGetters } from "vuex";
 
 export default {
-  props: ["currentUser"],
+  props: {
+    currentUser: {
+      type: Object,
+      required: true
+    }
+  },
   methods: {
     mypage(username) {
       console.log(username);

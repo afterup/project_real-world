@@ -6,7 +6,13 @@
 
 <script>
 export default {
-  props: ["user", "size"]
+  props: {
+    user: {
+      type: Object,
+      required: true
+    },
+    size: Number
+  }
 };
 </script>
 

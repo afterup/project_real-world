@@ -27,7 +27,12 @@ import BaseIcon from "@/components/ui/BaseIcon";
 
 export default {
   name: "list-card",
-  props: ["article"],
+  props: {
+    article: {
+      type: Object,
+      required: true
+    }
+  },
   methods: {
     articleClick() {
       this.$router.push({

@@ -1,7 +1,7 @@
 <template>
   <v-row align="end">
     <v-col cols="2">
-      <img :src="article.author.image" alt="user-image" class="user-image" />
+      <img :src="article.author.image" alt="user-image" />
     </v-col>
     <v-col col="4">
       <h3 class="user-name">{{ article.author.username }}</h3>
@@ -16,9 +16,16 @@
 <script>
 export default {
   name: "post-meta",
-  props: ["article"]
+  props: {
+    article: {
+      type: Object,
+      required: true
+    }
+  },
+  created() {
+    console.log(this.article.author.image);
+  }
 };
 </script>
 
-<style>
-</style>
+<style></style>

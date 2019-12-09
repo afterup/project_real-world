@@ -19,7 +19,12 @@ import { FETCH_ARTICLE, DELETE_ARTICLE } from "@/store/action.types";
 
 export default {
   name: "post",
-  props: ["article"],
+  props: {
+    article: {
+      type: Object,
+      required: false
+    }
+  },
   computed: {
     ...mapGetters(["currentUser"]),
     checkUser() {

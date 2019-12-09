@@ -31,7 +31,12 @@ import {
 
 export default {
   name: "editor-page",
-  props: ["slug"],
+  props: {
+    slug: {
+      type: String,
+      required: false
+    }
+  },
   async beforeRouteEnter(to, from, next) {
     await store.dispatch(RESET_ARTICLE);
     if (to.params.slug !== undefined) {
@@ -56,7 +61,7 @@ export default {
         })
         .then(slug => {
           console.log(slug);
-          this.$router.push({ name: `article`, params: {slug:slug} });
+          this.$router.push({ name: `article`, params: { slug: slug } });
         });
     }
   }
