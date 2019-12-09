@@ -1,16 +1,18 @@
 <template>
-  <v-row class="content">
-    <v-col cols="8">
-      <h1 class="headline">{{ article.title }}</h1>
-      <div class="description">{{ article.description }}</div>
-      <hr />
-      <div class="body">{{ article.body }}</div>
-    </v-col>
-    <v-col col="4" v-if="checkUser">
-      <v-btn @click="updateArticle">수정</v-btn>
-      <v-btn @click="deleteArticle">삭제</v-btn>
-    </v-col>
-  </v-row>
+  <v-container class="content">
+    <v-row>
+      <v-col cols="8">
+        <h1 class="display-1">{{ article.title }}</h1>
+        <div class="subtitle-1">{{ article.description }}</div>
+        <hr />
+        <div class="body-1">{{ article.body }}</div>
+      </v-col>
+      <v-col col="4" v-if="checkUser">
+        <v-btn @click="updateArticle">수정</v-btn>
+        <v-btn @click="deleteArticle">삭제</v-btn>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script>
@@ -71,9 +73,6 @@ export default {
 
 .content {
   border: 1px solid rgb(231, 227, 227);
-  height: 100vh;
-  padding: 10px;
-  margin: 10px;
 }
 
 .headline {

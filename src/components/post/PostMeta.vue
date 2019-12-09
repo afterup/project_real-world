@@ -1,7 +1,7 @@
 <template>
   <v-row align="end">
     <v-col cols="2">
-      <img :src="article.author.image" alt="user-image" />
+      <BaseIcon :user="article.author" :size="100" />
     </v-col>
     <v-col col="4">
       <h3 class="user-name">{{ article.author.username }}</h3>
@@ -14,16 +14,18 @@
 </template>
 
 <script>
+import BaseIcon from "@/components/ui/BaseIcon";
+
 export default {
   name: "post-meta",
+  components: {
+    BaseIcon
+  },
   props: {
     article: {
       type: Object,
       required: true
     }
-  },
-  created() {
-    console.log(this.article.author.image);
   }
 };
 </script>

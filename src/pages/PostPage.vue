@@ -14,10 +14,22 @@
           <div class="description">{{ article.description }}</div>
           <div class="body">{{ article.body }}</div>
         </v-col>
-        <v-col cols="4">
-          <v-btn @click.prevent="updateArticle">수정</v-btn>
-          <v-btn @click.prevent="deleteArticle">삭제</v-btn>
+        <v-col cols="1">
+          <v-divider vertical></v-divider>
         </v-col>
+        <v-col cols="3">
+          <v-row>
+            <v-btn @click.prevent="updateArticle">수정</v-btn>
+            <v-btn @click.prevent="deleteArticle">삭제</v-btn>
+          </v-row>
+        </v-col>
+      </v-row>
+      <v-divider class="mb-5"></v-divider>
+      <h3>Comment</h3>
+      <v-row>
+        <BaseIcon :user="article.author" :size="50" />
+        <v-text-field></v-text-field>
+        <v-btn>submit</v-btn>
       </v-row>
     </v-container>
   </v-container>
@@ -28,6 +40,7 @@ import { FETCH_ARTICLE, DELETE_ARTICLE } from "@/store/action.types";
 import { mapGetters } from "vuex";
 import store from "@/store";
 
+import BaseIcon from "@/components/ui/BaseIcon";
 import PostMeta from "@/components/post/PostMeta.vue";
 
 export default {
@@ -37,6 +50,10 @@ export default {
       type: String,
       required: false
     }
+  },
+  components: {
+    PostMeta,
+    BaseIcon
   },
   computed: {
     ...mapGetters(["article", "currentUser", "isLoading"])
@@ -58,9 +75,6 @@ export default {
         this.$router.push({ name: "home" });
       });
     }
-  },
-  components: {
-    PostMeta
   }
 };
 </script>
