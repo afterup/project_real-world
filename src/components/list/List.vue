@@ -29,6 +29,14 @@ export default {
     author: {
       type: String,
       required: false
+    },
+    tag: {
+      type: String,
+      required: false
+    },
+    favorited: {
+      type: String,
+      required: false
     }
   },
   computed: {
@@ -38,6 +46,14 @@ export default {
 
       if (this.author) {
         filters.author = this.author;
+      }
+
+      if (this.tag) {
+        filters.tag = this.tag;
+      }
+
+      if (this.favorited) {
+        filters.favorited = this.favorited;
       }
 
       return {

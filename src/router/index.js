@@ -46,6 +46,12 @@ const routes = [
         props: true
       },
       {
+        name: "user-favorite",
+        path: "favorite",
+        component: () => import("@/pages/UserFavorite"),
+        props: true
+      },
+      {
         name: "setting",
         path: "setting",
         component: () => import("@/pages/Setting.vue"),

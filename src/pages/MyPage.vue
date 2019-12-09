@@ -13,7 +13,9 @@
         <v-toolbar flat>
           <v-toolbar-items>
             <v-btn text exact :to="{ name: 'user-articles' }">작성한 글</v-btn>
-            <v-btn text :to="{ name: 'home'}" :username="this.$route.params.username">좋아요한 글</v-btn>
+            <v-btn text :to="{ name: 'user-favorite' }" :username="this.$route.params.username"
+              >좋아요한 글</v-btn
+            >
             <v-btn text :to="{ name: 'setting' }" large>설정</v-btn>
           </v-toolbar-items>
         </v-toolbar>
