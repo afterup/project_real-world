@@ -1,15 +1,26 @@
 <template>
   <v-card class="mx-auto">
     <v-card-text>
-      <div>Text Example</div>
-      <p class="display-1 text--primary">Title Text</p>
-      <p class="text-primary">yee</p>
+      <p class="display-1 text--primary">Recent Tags</p>
+      <v-divider></v-divider>
+      <span class="ma-2" v-for="tag in tags" :key="tag">
+        <v-chip small>{{ tag }}</v-chip>
+      </span>
     </v-card-text>
   </v-card>
 </template>
 
 <script>
-export default {};
+import { mapGetters } from "vuex";
+
+export default {
+  computed: {
+    ...mapGetters(["tags"])
+  },
+  created() {
+    this.$store.dispatch("FETCH_TAGS");
+  }
+};
 </script>
 
 <style>
