@@ -1,4 +1,4 @@
-import { ArticleService } from "@/common/api.service";
+import { ArticleService, ApiService } from "@/common/api.service";
 import {
   FETCH_ARTICLE,
   FETCH_ARTICLES,
@@ -23,6 +23,7 @@ const state = {
     tagList: [],
     author: {}
   },
+  tags: [],
   error: null
 };
 
@@ -33,15 +34,19 @@ const getters = {
   article(state) {
     return state.article;
   },
+  tags(state) {
+    return state.tags;
+  },
   isLoading(state) {
     return state.isLoading;
   }
 };
 
 const actions = {
-  [FETCH_ARTICLES]({ commit }, type, params) {
+  [FETCH_ARTICLES]({ commit }, params) {
     commit(SET_LOADING_STATUS);
-    ArticleService.get(type, params).then(({ data }) => {
+    console.log(params);
+    ArticleService.get(params.type, params.filters).then(({ data }) => {
       commit(SET_ARTICLES, data.articles);
       commit(SET_LOADING_STATUS);
     });
@@ -53,11 +58,9 @@ const actions = {
     commit(SET_LOADING_STATUS);
     return data.article;
   },
-  FETCH_USER_ARTICLE({ commit }, username) {
-    commit(SET_LOADING_STATUS);
-    ApiService.get(`articles?author=${username}`).then(({ data }) => {
-      commit(SET_ARTICLES, data, articles);
-      commit(SET_LOADING_STATUS);
+  FETCH_TAGS({ commit }) {
+    ApiService.get("tags").then(({ data }) => {
+      commit("SET_TAGS", data.tags);
     });
   },
   async [PUBLISH_ARTICLE]({ commit }, params) {
@@ -73,6 +76,11 @@ const actions = {
 };
 
 const mutations = {
+  RESET_ARTICLES(state) {
+    state.isLoading = false;
+    state.articles = {};
+    state.error = null;
+  },
   [RESET_ARTICLE](state) {
     state.isLoading = false;
     state.article = {};
@@ -86,6 +94,9 @@ const mutations = {
   },
   [SET_LOADING_STATUS](state) {
     state.isLoading = !state.isLoading;
+  },
+  SET_TAGS(state, tags) {
+    state.tags = tags;
   }
 };
 

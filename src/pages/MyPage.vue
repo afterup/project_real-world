@@ -12,8 +12,8 @@
       <v-col cols="9">
         <v-toolbar flat>
           <v-toolbar-items>
-            <v-btn text exact :to="{ name: 'home' }">작성한 글</v-btn>
-            <v-btn text exact :to="{ name: 'home' }">좋아요한 글</v-btn>
+            <v-btn text exact :to="{ name: 'user-articles' }">작성한 글</v-btn>
+            <v-btn text exact :to="{ name: 'home'}" :username="this.username">좋아요한 글</v-btn>
             <v-btn text exact :to="{ name: 'setting' }" large>설정</v-btn>
           </v-toolbar-items>
         </v-toolbar>

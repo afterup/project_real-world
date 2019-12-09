@@ -47,9 +47,12 @@ export const ApiService = {
 
 export const ArticleService = {
   get(type, params) {
-    return Vue.axios.get("articles" + `${type === "feed" ? "/feed" : ""}`, params).catch(error => {
-      throw new Error(`[RWV] ArticleService ${error}`);
-    });
+    console.log(params);
+    return Vue.axios
+      .get("articles" + `${type === "feed" ? "/feed" : ""}`, { params: params })
+      .catch(error => {
+        throw new Error(`[RWV] ArticleService ${error}`);
+      });
   },
 
   getOne(slug) {

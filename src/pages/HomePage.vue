@@ -9,17 +9,32 @@
         </div>
       </v-container>
     </div>
-    <List />
+    <v-container>
+      <div class="board-title mb-5">
+        <h1>Global Feed</h1>
+        <v-divider></v-divider>
+      </div>
+      <v-row no-gutters>
+        <v-col cols="8">
+          <List />
+        </v-col>
+        <v-col cols="4" align="start">
+          <ListTag></ListTag>
+        </v-col>
+      </v-row>
+    </v-container>
   </fragment>
 </template>
 
 <script>
 import List from "@/components/list/List";
+import ListTag from "@/components/list/ListTag";
 
 export default {
   name: "home",
   components: {
-    List
+    List,
+    ListTag
   },
   methods: {
     writeClick() {

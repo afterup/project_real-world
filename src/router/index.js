@@ -42,6 +42,12 @@ const routes = [
     props: true,
     children: [
       {
+        name: "user-articles",
+        path: "",
+        component: () => import("@/components/user/UserArticles"),
+        props: true
+      },
+      {
         name: "setting",
         path: "setting",
         component: () => import("@/components/user/Setting.vue"),
