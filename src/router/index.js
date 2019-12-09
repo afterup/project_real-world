@@ -39,18 +39,17 @@ const routes = [
     name: "mypage",
     path: "/:username",
     component: () => import("@/pages/MyPage.vue"),
-    props: true,
     children: [
       {
         name: "user-articles",
         path: "",
-        component: () => import("@/components/user/UserArticles"),
+        component: () => import("@/pages/UserArticles"),
         props: true
       },
       {
         name: "setting",
         path: "setting",
-        component: () => import("@/components/user/Setting.vue"),
+        component: () => import("@/pages/Setting.vue"),
         props: true
       }
     ]
