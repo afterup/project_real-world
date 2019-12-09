@@ -38,6 +38,7 @@ export default {
   },
   beforeRouteEnter(to, from, next) {
     store.dispatch(FETCH_ARTICLE, to.params.slug);
+    console.log(to.params.slug);
     next();
   },
   methods: {

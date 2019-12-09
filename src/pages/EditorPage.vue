@@ -23,7 +23,11 @@
 import { mapGetters } from "vuex";
 import { RESET_ARTICLE } from "@/store/mutation.types";
 import store from "@/store";
-import { PUBLISH_ARTICLE, FETCH_ARTICLE, UPDATE_ARTICLE } from "@/store/action.types";
+import {
+  PUBLISH_ARTICLE,
+  FETCH_ARTICLE,
+  UPDATE_ARTICLE
+} from "@/store/action.types";
 
 export default {
   name: "editor-page",
@@ -50,7 +54,8 @@ export default {
           taglist: this.taglist
         })
         .then(slug => {
-          this.$router.push({ name: `list` });
+          console.log(slug);
+          this.$router.push({ name: `article`, params: {slug:slug} });
         });
     }
   }

@@ -25,7 +25,10 @@ export default {
   methods: {
     mypage(username) {
       console.log(username);
-      this.$router.push({ name: "mypage", params: { username: username } });
+      this.$router.push({
+        name: "user-articles",
+        params: { username: username }
+      });
     },
     logout() {
       this.$store.dispatch("LOGOUT");
