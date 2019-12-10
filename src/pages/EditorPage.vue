@@ -41,7 +41,10 @@ export default {
     await store.dispatch(RESET_ARTICLE);
     if (to.params.slug !== undefined) {
       console.log(to.params.previousArticle);
-      await store.dispatch(FETCH_ARTICLE, to.params.slug, to.params.previousArticle);
+      await store.dispatch(FETCH_ARTICLE, {
+        slug: to.params.slug,
+        previousArticle: to.params.previousArticle
+      });
     }
     return next();
   },

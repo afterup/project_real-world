@@ -25,12 +25,7 @@
         </v-col>
       </v-row>
       <v-divider class="mb-5"></v-divider>
-      <h3>Comment</h3>
-      <v-row>
-        <BaseIcon :user="article.author" :size="50" />
-        <v-text-field></v-text-field>
-        <v-btn>submit</v-btn>
-      </v-row>
+      <Comment :slug="article.slug" />
     </v-container>
   </v-container>
 </template>
@@ -40,8 +35,8 @@ import { FETCH_ARTICLE, DELETE_ARTICLE } from "@/store/action.types";
 import { mapGetters } from "vuex";
 import store from "@/store";
 
-import BaseIcon from "@/components/ui/BaseIcon";
 import PostMeta from "@/components/post/PostMeta.vue";
+import Comment from "@/components/post/Comment.vue";
 
 export default {
   name: "post-page",
@@ -53,7 +48,7 @@ export default {
   },
   components: {
     PostMeta,
-    BaseIcon
+    Comment
   },
   computed: {
     ...mapGetters(["article", "currentUser", "isLoading"])

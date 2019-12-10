@@ -80,8 +80,16 @@ export const ArticleService = {
 
 export const ProfileService = {
   get(params) {
-    return Vue.axios.get(`profiles/${params}`).catch(error => {
+    return ApiService.get(`profiles/${params}`).catch(error => {
       throw new Error(`[RWV] ProfileService ${error}`);
+    });
+  }
+};
+
+export const CommentService = {
+  post(slug, params) {
+    return ApiService.post(`articles/${slug}/comments`, params).catch(error => {
+      throw new Error(`[RWV] CommentService ${error}`);
     });
   }
 };
