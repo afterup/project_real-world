@@ -48,31 +48,31 @@ export const ApiService = {
 export const ArticleService = {
   get(type, params) {
     console.log(params);
-    return Vue.axios
-      .get("articles" + `${type === "feed" ? "/feed" : ""}`, { params: params })
-      .catch(error => {
-        throw new Error(`[RWV] ArticleService ${error}`);
-      });
+    return ApiService.get("articles" + `${type === "feed" ? "/feed" : ""}`, {
+      params: params
+    }).catch(error => {
+      throw new Error(`[RWV] ArticleService ${error}`);
+    });
   },
 
   getOne(slug) {
-    return Vue.axios.get(`articles/${slug}`).catch(error => {
+    return ApiService.get(`articles/${slug}`).catch(error => {
       throw new Error(`[RWV] ArticleService ${error}`);
     });
   },
 
   post(params) {
-    return Vue.axios.post("articles", params);
+    return ApiService.post("articles", params);
   },
 
   put(params) {
-    return Vue.axios.put(`articles/${params.slug}`, params).catch(error => {
+    return ApiService.put(`articles/${params.slug}`, params).catch(error => {
       throw new Error(`[RWV] ArticleService ${error}`);
     });
   },
 
   delete(slug) {
-    return Vue.axios.delete(`articles/${slug}`).catch(error => {
+    return ApiService.delete(`articles/${slug}`).catch(error => {
       throw new Error(`[RWV] ArticleService ${error}`);
     });
   }
