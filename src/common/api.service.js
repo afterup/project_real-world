@@ -87,6 +87,11 @@ export const ProfileService = {
 };
 
 export const CommentService = {
+  get(slug) {
+    return ApiService.get(`articles/${slug}/comments`).catch(error => {
+      throw new Error(`[RWV] CommentService ${error}`);
+    });
+  },
   post(slug, params) {
     return ApiService.post(`articles/${slug}/comments`, params).catch(error => {
       throw new Error(`[RWV] CommentService ${error}`);

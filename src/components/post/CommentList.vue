@@ -1,0 +1,59 @@
+<template>
+  <v-container v-if="comments">
+    <v-row v-for="comment in comments" :key="comment.id">
+      <v-col cols="1" class="mr-3">
+        <BaseIcon
+          :user="comment.author"
+          :size="50"
+          @click.native="toUserPage(comment.author.username)"
+          class="base-icon"
+        />
+      </v-col>
+      <v-col cols="7">
+        <div class="font-weight-bold">{{ comment.author.username }}</div>
+        <p class="body-2">
+          {{ comment.body }}
+        </p>
+        <div class="caption">
+          {{ comment.createdAt }}
+        </div>
+      </v-col>
+    </v-row>
+  </v-container>
+</template>
+
+<script>
+import { mapGetters } from "vuex";
+
+import BaseIcon from "@/components/ui/BaseIcon";
+
+export default {
+  props: {
+    slug: {
+      type: String,
+      required: true
+    }
+  },
+  components: {
+    BaseIcon
+  },
+  computed: {
+    ...mapGetters(["comments"])
+  },
+  created() {
+    console.log(this.slug);
+    this.$store.dispatch("FETCH_COMMENT", this.slug);
+  },
+  methods: {
+    toUserPage(username) {
+      this.$router.push({ name: "user-articles", params: { username: username } });
+    }
+  }
+};
+</script>
+
+<style scoped>
+.base-icon:hover {
+  cursor: pointer;
+}
+</style>

@@ -6,12 +6,16 @@
       <v-text-field v-model="body"></v-text-field>
       <v-btn @click.prevent="onSubmit">submit</v-btn>
     </v-row>
+    <v-row>
+      <CommentList :slug="this.slug" />
+    </v-row>
   </v-container>
 </template>
 
 <script>
 import { mapGetters } from "vuex";
 import BaseIcon from "@/components/ui/BaseIcon";
+import CommentList from "@/components/post/CommentList";
 
 export default {
   name: "comment",
@@ -30,7 +34,8 @@ export default {
     ...mapGetters(["currentUser"])
   },
   components: {
-    BaseIcon
+    BaseIcon,
+    CommentList
   },
   methods: {
     onSubmit() {

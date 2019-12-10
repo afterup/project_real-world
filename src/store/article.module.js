@@ -15,12 +15,15 @@ const state = {
     tagList: [],
     author: {}
   },
-  comments: []
+  comments: {}
 };
 
 const getters = {
   article(state) {
     return state.article;
+  },
+  comments(state) {
+    return state.comments;
   }
 };
 
@@ -39,7 +42,10 @@ const actions = {
       return data.article;
     }
   },
-  async FETCH_COMMENT({ commit }) {},
+  async FETCH_COMMENT({ commit }, slug) {
+    const { data } = await CommentService.get(slug);
+    commit("SET_COMMENTS", data.comments);
+  },
   async [PUBLISH_ARTICLE]({ commit }, params) {
     const { data } = await ArticleService.post(params);
     return data.article.slug;
@@ -71,6 +77,10 @@ const mutations = {
 
   [SET_ARTICLE](state, article) {
     state.article = article;
+  },
+
+  SET_COMMENTS(state, comments) {
+    state.comments = comments;
   },
   [SET_LOADING_STATUS](state) {
     state.isLoading = !state.isLoading;
