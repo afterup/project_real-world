@@ -63,6 +63,11 @@ const actions = {
   [DELETE_ARTICLE]({ commit }, slug) {
     ArticleService.delete(slug);
   },
+
+  DELETE_COMMENT({ commit }, params) {
+    CommentService.delete(params.slug, params.id);
+  },
+
   RESET_ARTICLE({ commit }) {
     commit(RESET_ARTICLE);
   }

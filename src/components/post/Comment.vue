@@ -45,7 +45,8 @@ export default {
           body: this.body
         })
         .then(() => {
-          this.$store.dispatch("FETCH_COMMENT");
+          this.body = "";
+          this.$store.dispatch("FETCH_COMMENT", this.slug);
         });
     }
   }

@@ -93,7 +93,14 @@ export const CommentService = {
     });
   },
   post(slug, params) {
+    console.log(params);
     return ApiService.post(`articles/${slug}/comments`, params).catch(error => {
+      throw new Error(`[RWV] CommentService ${error}`);
+    });
+  },
+
+  delete(slug, id) {
+    return ApiService.delete(`articles/${slug}/comments/${id}`).catch(error => {
       throw new Error(`[RWV] CommentService ${error}`);
     });
   }

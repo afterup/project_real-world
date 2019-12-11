@@ -18,6 +18,9 @@
           {{ comment.createdAt }}
         </div>
       </v-col>
+      <v-col cols="2">
+        <v-btn @click="deleteComment(comment.id)">x</v-btn>
+      </v-col>
     </v-row>
   </v-container>
 </template>
@@ -47,6 +50,17 @@ export default {
   methods: {
     toUserPage(username) {
       this.$router.push({ name: "user-articles", params: { username: username } });
+    },
+
+    deleteComment(id) {
+      this.$store
+        .dispatch("DELETE_COMMENT", {
+          slug: this.slug,
+          id: id
+        })
+        .then(() => {
+          this.$store.dispatch("FETCH_COMMENT", this.slug);
+        });
     }
   }
 };
